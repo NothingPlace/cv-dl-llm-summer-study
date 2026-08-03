@@ -522,3 +522,14 @@ Jupyter Notebook 是一个**基于 Web 的交互式计算环境**，允许用户
 | **输出形式** | 代码执行结果 | 交互式文档 |
 | **文件格式** | .py（纯文本代码） | .ipynb（JSON） |
 
+# Q&A
+
+1. **Q**:conda env list出现两个相同base环境  
+**A**：？  
+2. **Q**：vscode选择conda环境时每个环境出现两次  
+**A**：vscode自动检索与python插件检索到的环境重复，无影响~~大概~~
+3. **Q**：conda 安装opencv后import cv2出现报错ImportError: DLL load failed while importing cv2: 找不到指定的程序。  
+**A**：未知错误，通过重新下载解决
+4. **Q**：在markdown列表中插入代码块时会打断正常的列表缩进。  
+**A**：手动在代码块前添加缩进，同时代码块往下的文本内容也要添加缩进。
+
