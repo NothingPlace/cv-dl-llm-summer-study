@@ -82,7 +82,7 @@ python week02_cv_demo.py
 
 #### Week03阶段成果
 
-- **一**：学习了解增强、边缘等形态学处理技术（详细笔记请查看：[week03.md](notes/week03.md) ）
+- **一**：学习了解深度学习训练流程（详细笔记请查看：[week03.md](notes/week03.md) ）
 - **二**：完成代码实践week03_dl_basics.py,实现softmax 分类。（详细代码请查看：[week03_dl_basics.py](./deep_learning/week03_dl_basics.py) ）
 
 #### Week03运行方式
@@ -91,6 +91,26 @@ python week02_cv_demo.py
 conda activate d2l #激活环境
 cd cv-dl-llm-summer-study\deep_learning #进入文件目录
 python week03_dl_basics.py
+```
+
+### Week04总结
+
+#### Week04核心目标
+
+- [ ] **目标一**：学习了解多层感知机，dropout等相关内容
+- [ ] **目标二**：完成代码实践week04_mlp_classification.py
+
+#### Week04阶段成果
+
+- **一**：学习了解多层感知机，dropout等相关内容（详细笔记请查看：[week04.md](notes/week04.md) ）
+- **二**：完成代码实践week04_mlp_classification.py,实现MLP 分类。（详细代码请查看：[week04_mlp_classification.py](./deep_learning/week04_mlp_classification.py) ）
+
+#### Week04运行方式
+
+```python
+conda activate d2l #激活环境
+cd cv-dl-llm-summer-study\deep_learning #进入文件目录
+python week04_mlp_classification.py
 ```
 
 ## 项目结构

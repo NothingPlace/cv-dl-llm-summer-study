@@ -336,40 +336,65 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_dir)
 
 figs = []
+output_dir = os.path.join(current_dir,"..","result", "week03_line_charts")
+os.makedirs(output_dir, exist_ok=True)
 data = FashionMNISTData()
-model = SoftmaxRegression(num_outputs=10, lr=0.1,batch_size=256)
+
+lr, batch_size = 0.1, 256
+model = SoftmaxRegression(num_outputs=10, lr=lr,batch_size=batch_size)
 trainer = Trainer(model=model, date=data,max_epoch=10)
 fig = trainer.train()
-plt.show() 
-figs.append(fig)
+path = os.path.join(output_dir, f"lr={lr}_batch_size={batch_size}.jpg")
+plt.savefig(path, format='jpg', bbox_inches='tight')
+# figs.append(fig)
+# plt.show() 
 
-
-
-
-# model = SoftmaxRegression(num_outputs=10, lr=0.01,batch_size=256)
+# lr, batch_size = 0.01, 256
+# model = SoftmaxRegression(num_outputs=10, lr=lr,batch_size=batch_size)
 # trainer = Trainer(model=model, date=data,max_epoch=10)
-# trainer.train()
+# fig = trainer.train()
+# path = os.path.join(output_dir, f"lr={lr}_batch_size={batch_size}.jpg")
+# plt.savefig(path, format='jpg', bbox_inches='tight')
 
-
-
-# model = SoftmaxRegression(num_outputs=10, lr=0.3,batch_size=256)
+# lr, batch_size = 0.05, 256
+# model = SoftmaxRegression(num_outputs=10, lr=lr,batch_size=batch_size)
 # trainer = Trainer(model=model, date=data,max_epoch=10)
-# trainer.train()
+# fig = trainer.train()
+# path = os.path.join(output_dir, f"lr={lr}_batch_size={batch_size}.jpg")
+# plt.savefig(path, format='jpg', bbox_inches='tight')
 
 
-# model = SoftmaxRegression(num_outputs=10, lr=0.5,batch_size=256)
+# lr, batch_size = 0.3, 256
+# model = SoftmaxRegression(num_outputs=10, lr=lr,batch_size=batch_size)
 # trainer = Trainer(model=model, date=data,max_epoch=10)
-# trainer.train()
+# fig = trainer.train()
+# path = os.path.join(output_dir, f"lr={lr}_batch_size={batch_size}.jpg")
+# plt.savefig(path, format='jpg', bbox_inches='tight')
 
-
-
-# model = SoftmaxRegression(num_outputs=10, lr=0.1,batch_size=128)
+# lr, batch_size = 0.5, 256
+# model = SoftmaxRegression(num_outputs=10, lr=lr,batch_size=batch_size)
 # trainer = Trainer(model=model, date=data,max_epoch=10)
-# trainer.train()
+# fig = trainer.train()
+# path = os.path.join(output_dir, f"lr={lr}_batch_size={batch_size}.jpg")
+# plt.savefig(path, format='jpg', bbox_inches='tight')
 
-
-
-# model = SoftmaxRegression(num_outputs=10, lr=0.1,batch_size=512)
+# lr, batch_size = 0.1, 64
+# model = SoftmaxRegression(num_outputs=10, lr=lr,batch_size=batch_size)
 # trainer = Trainer(model=model, date=data,max_epoch=10)
-# trainer.train()
+# fig = trainer.train()
+# path = os.path.join(output_dir, f"lr={lr}_batch_size={batch_size}.jpg")
+# plt.savefig(path, format='jpg', bbox_inches='tight')
 
+# lr, batch_size = 0.1, 128
+# model = SoftmaxRegression(num_outputs=10, lr=lr,batch_size=batch_size)
+# trainer = Trainer(model=model, date=data,max_epoch=10)
+# fig = trainer.train()
+# path = os.path.join(output_dir, f"lr={lr}_batch_size={batch_size}.jpg")
+# plt.savefig(path, format='jpg', bbox_inches='tight')
+
+# lr, batch_size = 0.1, 512
+# model = SoftmaxRegression(num_outputs=10, lr=lr,batch_size=batch_size)
+# trainer = Trainer(model=model, date=data,max_epoch=10)
+# fig = trainer.train()
+# path = os.path.join(output_dir, f"lr={lr}_batch_size={batch_size}.jpg")
+# plt.savefig(path, format='jpg', bbox_inches='tight')

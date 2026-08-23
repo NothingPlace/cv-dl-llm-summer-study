@@ -85,7 +85,7 @@ if __name__ == "__main__":
     
     # 3. 执行处理
     # 输出目录也设在脚本所在目录下
-    output_dir = os.path.join(script_dir, "processed_images")
+    output_dir = os.path.join(script_dir,"..","..","result", "week01_processed_images")
     process_images(image_paths, output_dir)
     
     print("\n✨ 所有图片处理完成！")
