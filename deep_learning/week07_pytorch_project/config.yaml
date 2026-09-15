@@ -1,0 +1,103 @@
+# ============================================================
+# week07 PyTorch 项目配置文件
+# 用法：train.py / test.py 启动时读取本文件；CLI 参数优先级高于本文件
+# 加载示例（train.py 中）:
+#   import yaml
+#   cfg = yaml.safe_load(open('config.yaml', encoding='utf-8'))
+#   data  = build_data(cfg['data'])          # dataset.py
+#   model = build_model(cfg['model']['name'], cfg['model'])  # model.py
+# ============================================================
+
+# ---------- 可复现 ----------
+seed: 42
+deterministic: true        # torch.backends.cudnn.deterministic = True
+benchmark: false           # torch.backends.cudnn.benchmark = False
+
+# ---------- 数据 ----------
+data:
+  # 路径 A（torchvision 标准数据集）: fashion_mnist | mnist | cifar10 | cifar100 | svhn
+  # 路径 B（自收集 ImageFolder）  : image_folder（必须提供 train_dir / val_dir）
+  name: flowers102
+  root: ./data                       # 路径 A：数据集下载/缓存目录
+  resize: [224, 224]                   # 输入分辨率 H W
+  rgb_expand: false                          # 单通道数据集转 3 通道（预训练模型必须 true）
+  mean: [0.485, 0.456, 0.406]                      # 长度为 1 且 rgb=true 时自动广播为 3 通道
+  std: [0.229, 0.224, 0.225]
+  # CIFAR10  推荐: mean: [0.4914, 0.4822, 0.4465],  std: [0.2470, 0.2435, 0.2616]
+  # CIFAR100 推荐: mean: [0.5071, 0.4865, 0.4409],  std: [0.2673, 0.2564, 0.2762]
+  num_workers: 2
+  pin_memory: true
+  batch_size: 8
+  download: true                     # 路径 A：是否自动下载
+
+  # --- 路径 B 专用（路径 A 时禁止出现，否则 build_data 报错）---
+  # 目录结构: train_dir/<类别名>/*.jpg，val_dir 同理；类别名=子目录名
+  # name: image_folder
+  # train_dir: ./data/mydata/train
+  # val_dir:   ./data/mydata/val
+
+# ---------- 模型 ----------
+# 可选模型（model.py 注册表）: mlp | alexnet | resnet18 | vgg16
+#   mlp      纯全连接（input_dim=784，仅适合 28×28 数据集）
+#   alexnet  AlexNet（Lazy 层，train.py 启动时自动做 dummy forward 初始化）
+#   resnet18 torchvision ResNet18（pretrained=true 加载 ImageNet 权重）
+#   vgg16    torchvision VGG16（pretrained=true 加载 ImageNet 权重）
+model:
+  name: resnet18
+
+  # 模型构造参数（model.py 的 build_model 读 cfg.model.params 传给模型类）
+  params:
+    num_classes: 102                  # 需与数据集类别数一致（cifar100 → 100）
+    pretrained: true                 # resnet18/vgg16 专用：是否加载 ImageNet 预训练权重
+
+  # ---- 迁移学习微调模式（feature_extract | full）----
+  # full            全量微调：骨干+分类头全部参数参与训练（默认，保持基线语义）
+  # feature_extract 仅特征提取：冻结整个骨干，只训练分类头（可训练参数最少，训练最快）
+  finetune_mode: full
+
+  # 可选：从本地 .pth 加载权重（优先级低于 pretrained，用于自定义迁移学习）
+  pretrained_path: null
+
+# ---------- 训练 ----------
+train:
+  max_epoch: 50
+  lr: 0.001                          # 学习率（Trainer 用来建优化器）
+  device: cuda                       # 无 GPU 时代码自动回退 cpu
+  optimizer: sgd                    # sgd | adam（pretrained_resnet18 用 adam）
+  momentum: 0.9                      # 仅 sgd
+  weight_decay: 0.0001
+  early_stopping:
+    enabled: True
+    patience: 5
+    metric: test_loss                # test_loss | test_acc
+    mode: min                        # min(loss) | max(acc)
+
+# ---------- 输出 ----------
+output:
+  root: ./result
+  checkpoint_dir: checkpoints        # best_model.pth 保存目录
+  log_dir: logs                      # CSV 训练日志 / run 元信息
+  chart_dir: charts                  # 训练曲线 / 混淆矩阵
+  best_model_name: best_model.pth
+  save_best_by: test_loss            # test_loss | test_acc：按哪个指标判最优
+
+# ---------- 日志 ----------
+logging:
+  csv_log: true                      # 每 epoch 指标写 train_*.csv
+  run_meta: true                     # 写 run_*.txt（超参/种子/版本/最佳 epoch）
+  verbose: true                      # 控制台打印
+  plot_curves: true                  # 训练曲线（loss/acc vs epoch）
+
+# ---------- 测试 ----------
+test:
+  load_ckpt: best_model.pth          # 相对 output.checkpoint_dir
+  plot_confusion_matrix: true
+  # 类别级指标（每类 precision/recall/f1/support）
+  per_class_csv: true                # 输出 logs/per_class_metrics_*.csv（按 recall 升序）
+  per_class_chart: true              # 输出 charts/per_class_accuracy_*.jpg（横向条形图）
+  # 错误样例展示（网格图：图片 + 真实结果 + 预测结果，红色标题=预测错误）
+  plot_error_samples: true
+  error_samples_num: 16              # 展示前 N 个错误样本（设 0 关闭；CLI: --num-errors）
+  # 预测展示（测试集前 N 个样本，绿色标题=正确，红色标题=错误）
+  plot_prediction_samples: true
+  prediction_samples_num: 16         # 设 0 关闭；CLI: --num-preds
