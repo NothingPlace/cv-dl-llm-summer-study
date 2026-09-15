@@ -1,0 +1,42 @@
+{
+  "group": "architecture",
+  "tag": "arch_alexnet",
+  "run_dir": "experiments\\results\\architecture\\arch_alexnet",
+  "finished_at": "2026-09-14 22:16:36",
+  "fingerprint": "b1b1e3dcb75320a1",
+  "overrides": {
+    "model.name": "alexnet",
+    "model.params.pretrained": null
+  },
+  "params": {
+    "model": "alexnet",
+    "dataset": "flowers102",
+    "optimizer": "sgd",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 8,
+    "max_epoch": 50,
+    "pretrained": null,
+    "finetune_mode": "full",
+    "augmentation": "none",
+    "seed": 42
+  },
+  "epochs_run": 40,
+  "best_epoch": 35,
+  "best_model_eval": {
+    "test_loss": 3.4157663675604004,
+    "test_acc": 0.18116766953976257
+  },
+  "macro_recall": 0.2033224995841152,
+  "weighted_recall": 0.18116766953976257,
+  "history": {
+    "min_test_loss": 3.4157663675604004,
+    "max_test_acc": 0.22410147991543342,
+    "final_test_loss": 3.8458470624177603,
+    "final_test_acc": 0.22410147991543342
+  },
+  "torch_version": "2.13.0+cu130",
+  "python_version": "3.11.15",
+  "total_time_s": 1432.96,
+  "status": "success"
+}

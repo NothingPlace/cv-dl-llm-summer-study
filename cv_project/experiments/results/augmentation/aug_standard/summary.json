@@ -1,0 +1,41 @@
+{
+  "group": "augmentation",
+  "tag": "aug_standard",
+  "run_dir": "experiments\\results\\augmentation\\aug_standard",
+  "finished_at": "2026-09-14 22:00:50",
+  "fingerprint": "ee1c9ac0a5295901",
+  "overrides": {
+    "data.augmentation": "standard"
+  },
+  "params": {
+    "model": "resnet18",
+    "dataset": "flowers102",
+    "optimizer": "sgd",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 8,
+    "max_epoch": 50,
+    "pretrained": true,
+    "finetune_mode": "full",
+    "augmentation": "standard",
+    "seed": 42
+  },
+  "epochs_run": 25,
+  "best_epoch": 20,
+  "best_model_eval": {
+    "test_loss": 0.45325136837034496,
+    "test_acc": 0.8858350951374208
+  },
+  "macro_recall": 0.9013621454277558,
+  "weighted_recall": 0.8858350951374208,
+  "history": {
+    "min_test_loss": 0.45325136837034496,
+    "max_test_acc": 0.8858350951374208,
+    "final_test_loss": 0.4776641141176066,
+    "final_test_acc": 0.8845340705805822
+  },
+  "torch_version": "2.13.0+cu130",
+  "python_version": "3.11.15",
+  "total_time_s": 946.03,
+  "status": "success"
+}

@@ -1,0 +1,41 @@
+{
+  "group": "lr",
+  "tag": "lr_0.01",
+  "run_dir": "experiments\\results\\lr\\lr_0.01",
+  "finished_at": "2026-09-14 20:24:51",
+  "fingerprint": "b1ce37746e533f2d",
+  "overrides": {
+    "train.lr": 0.01
+  },
+  "params": {
+    "model": "resnet18",
+    "dataset": "flowers102",
+    "optimizer": "sgd",
+    "lr": 0.01,
+    "weight_decay": 0.0001,
+    "batch_size": 8,
+    "max_epoch": 50,
+    "pretrained": true,
+    "finetune_mode": "full",
+    "augmentation": "none",
+    "seed": 42
+  },
+  "epochs_run": 20,
+  "best_epoch": 15,
+  "best_model_eval": {
+    "test_loss": 1.3083914249840194,
+    "test_acc": 0.6996259554399089
+  },
+  "macro_recall": 0.7352555735368185,
+  "weighted_recall": 0.6996259554399089,
+  "history": {
+    "min_test_loss": 1.3083914249840194,
+    "max_test_acc": 0.7134493413563181,
+    "final_test_loss": 1.347812242644174,
+    "final_test_acc": 0.7056431940152871
+  },
+  "torch_version": "2.13.0+cu130",
+  "python_version": "3.11.15",
+  "total_time_s": 1377.36,
+  "status": "success"
+}

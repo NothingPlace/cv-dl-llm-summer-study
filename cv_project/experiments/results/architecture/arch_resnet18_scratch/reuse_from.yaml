@@ -1,0 +1,6 @@
+status: reused
+source_group: pretrained
+source_tag: pretrained_false
+source_run_dir: pretrained/pretrained_false
+fingerprint: 50a136cf23bb9caf
+reused_at: '2026-09-14 22:16:36'

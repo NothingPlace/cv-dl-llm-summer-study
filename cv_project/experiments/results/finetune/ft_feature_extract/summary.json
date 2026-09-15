@@ -1,0 +1,41 @@
+{
+  "group": "finetune",
+  "tag": "ft_feature_extract",
+  "run_dir": "experiments\\results\\finetune\\ft_feature_extract",
+  "finished_at": "2026-09-14 22:40:29",
+  "fingerprint": "50cc285edd44f718",
+  "overrides": {
+    "model.finetune_mode": "feature_extract"
+  },
+  "params": {
+    "model": "resnet18",
+    "dataset": "flowers102",
+    "optimizer": "sgd",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 8,
+    "max_epoch": 50,
+    "pretrained": true,
+    "finetune_mode": "feature_extract",
+    "augmentation": "none",
+    "seed": 42
+  },
+  "epochs_run": 50,
+  "best_epoch": 49,
+  "best_model_eval": {
+    "test_loss": 0.9200596722576802,
+    "test_acc": 0.7996422182468694
+  },
+  "macro_recall": 0.8192652635500015,
+  "weighted_recall": 0.7996422182468694,
+  "history": {
+    "min_test_loss": 0.9200596722576802,
+    "max_test_acc": 0.7996422182468694,
+    "final_test_loss": 0.9207171859517597,
+    "final_test_acc": 0.7981785656204261
+  },
+  "torch_version": "2.13.0+cu130",
+  "python_version": "3.11.15",
+  "total_time_s": 1714.57,
+  "status": "success"
+}

@@ -1,0 +1,8 @@
+{
+  "group": "architecture",
+  "tag": "arch_resnet18_scratch",
+  "status": "reused",
+  "reuse_from": "pretrained/pretrained_false",
+  "fingerprint": "50a136cf23bb9caf",
+  "finished_at": "2026-09-14 22:16:36"
+}

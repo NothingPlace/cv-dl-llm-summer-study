@@ -1,0 +1,39 @@
+{
+  "group": "baseline",
+  "tag": "baseline",
+  "run_dir": "experiments\\results\\baseline\\baseline",
+  "finished_at": "2026-09-14 20:02:56",
+  "fingerprint": "68700940827bd5c1",
+  "overrides": {},
+  "params": {
+    "model": "resnet18",
+    "dataset": "flowers102",
+    "optimizer": "sgd",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 8,
+    "max_epoch": 50,
+    "pretrained": true,
+    "finetune_mode": "full",
+    "augmentation": "none",
+    "seed": 42
+  },
+  "epochs_run": 33,
+  "best_epoch": 28,
+  "best_model_eval": {
+    "test_loss": 0.5887410611296326,
+    "test_acc": 0.8565620426085543
+  },
+  "macro_recall": 0.8818963233490991,
+  "weighted_recall": 0.8565620426085543,
+  "history": {
+    "min_test_loss": 0.5887410611296326,
+    "max_test_acc": 0.8570499268173687,
+    "final_test_loss": 0.6299757532693957,
+    "final_test_acc": 0.8526589689380387
+  },
+  "torch_version": "2.13.0+cu130",
+  "python_version": "3.11.15",
+  "total_time_s": 1314.87,
+  "status": "success"
+}

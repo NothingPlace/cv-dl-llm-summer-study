@@ -113,6 +113,151 @@ cd cv-dl-llm-summer-study\deep_learning #进入文件目录
 python week04_mlp_classification.py
 ```
 
+### Week05总结
+
+#### Week05核心目标
+
+- [ ] **目标一**：学习了解LeNet、简单 CNN等相关内容
+- [ ] **目标二**：完成代码实践week05_cnn_baseline.py
+
+#### Week05阶段成果
+
+- **一**：学习了解LeNet、简单 CNN等相关内容（详细笔记请查看：[week05.md](notes/week05.md) ）
+- **二**：完成代码实践week05_cnn_baseline.py,实现LeNet 分类。（详细代码请查看：[week05_cnn_baseline.py](./deep_learning/week05_cnn_baseline.py) ）
+
+#### Week05运行方式
+
+```python
+conda activate d2l #激活环境
+cd cv-dl-llm-summer-study\deep_learning #进入文件目录
+python week05_cnn_baseline.py
+```
+
+### Week06总结
+
+#### Week06核心目标
+
+- [ ] **目标一**：学习了解AlexNet、VGG、GoogLeNet、ResNet等相关内容
+- [ ] **目标二**：完成代码实践week06_transfer_learning.py
+
+#### Week06阶段成果
+
+- **一**：学习了解AlexNet、VGG、GoogLeNet、ResNet等相关内容（详细笔记请查看：[week06.md](notes/week06.md) ）
+- **二**：完成代码实践week06_transfer_learning.py,实现LeNet 分类。（详细代码请查看：[week06_transfer_learning.py](./deep_learning/week06_transfer_learning.py) ）
+
+注：由于AlexNet、VGG、GoogLeNet训练时间较长，相关训练图像放置在week06.md中。
+
+#### Week06运行方式
+
+```python
+conda activate d2l #激活环境
+cd cv-dl-llm-summer-study\deep_learning #进入文件目录
+python week06_transfer_learning.py
+```
+
+### Week07总结
+
+#### Week07核心目标
+
+- [ ] **目标一**：学习了解数据增强、配置文件、checkpoint等相关内容
+- [ ] **目标二**：完成代码实践train/test/dataset/model.py
+
+#### Week07阶段成果
+
+- **一**：学习了解数据增强、配置文件、checkpoint等相关内容（详细笔记请查看：[week07.md](notes/week07.md) ）
+- **二**：完成代码实践train/test/dataset/model.py,实现通用训练代码。（详细代码请查看：[week07_pytorch_project.py](./deep_learning/week07_pytorch_project) ）
+
+### Week08总结
+
+#### Week08核心目标
+
+- [ ] **目标一**：学习了解了解图像分类、目标检测、语义分割、ViT/Attention 的基本差异等相关内容
+- [ ] **目标二**：确定最终项目候选方向
+
+#### Week08阶段成果
+
+- **一**：学习了解了解图像分类、目标检测、语义分割、ViT/Attention 的基本差异等相关内容（详细笔记请查看：[week08.md](notes/week08.md) ）
+- **二**：确定最终项目候选方向，实现基于ResNet的花卉识别
+
+### Week09总结
+
+#### Week09核心目标
+
+- [ ] **目标一**：确定最终视觉项目题目、数据集、类别、评价指标；完成数据集说明和初步预处理。
+- [ ] **目标二**：完成代码实践llm_api_demo.py
+
+#### Week09阶段成果
+
+- **一**：学习了解AlexNet、VGG、GoogLeNet、ResNet等相关内容（详细笔记请查看：[week09.md](notes/week09.md) ）
+- **二**：完成代码实践week06_transfer_learning.py,实现LeNet 分类。（详细代码请查看：[llm_api_demo.py](./llm_intro/api_demo/llm_api_demo.py) ）
+
+#### Week09运行方式
+
+```python
+conda activate d2l #激活环境
+cd cv-dl-llm-summer-study\llm_intro\api_demo #进入文件目录
+python llm_api_demo.py
+```
+
+### Week10总结
+
+#### Week10核心目标
+
+- [ ] **目标一**：搭建项目 baseline：model.py、train.py、test.py；
+- [ ] **目标二**：学习了解了解本地模型、量化、显存占用、推理速度、CPU/GPU 推理差异等相关内容
+- [ ] **目标三**：完成本地部署/本地推理：任选一种工具路线，记录环境、模型、启动命令和推理截图。
+
+#### Week10阶段成果
+
+- **一**：学习了解了解本地模型、量化、显存占用、推理速度、CPU/GPU 推理差异等相关内容（详细笔记请查看：[week10.md](notes/week10.md) ）
+- **二**：搭建项目 baseline：model.py、train.py、test.py。（详细代码请查看：[cv_project](./cv_project/) ）
+- [ ] **三**：完成本地部署/本地推理（详细代码请查看：[local_deploy.py](./llm_intro/local_deploy/local_deploy.py) ）
+
+#### Week10运行方式
+
+```python
+conda activate d2l #激活环境
+cd cv-dl-llm-summer-study\llm_intro\local_deploy #进入文件目录
+python local_deploy.py
+cd cv-dl-llm-summer-study\cv_project #进入文件目录
+python train.py
+python test.py
+```
+
+### Week11总结
+
+#### Week11核心目标
+
+- [ ] **目标一**：学习了解学习消融实验、参数对比、数据增强对比、类别级准确率、混淆矩阵、错误样例分析等相关内容
+- [ ] **目标二**：完成代码实践,实现不同模型参数的对比及可视化分析
+
+#### Week11阶段成果
+
+- **一**：学习了解学习消融实验、参数对比、数据增强对比、类别级准确率、混淆矩阵、错误样例分析等相关内容（详细笔记请查看：[week11.md](notes/week11.md) ）
+- **二**：完成代码实践,实现不同模型参数的对比及可视化分析。（详细代码请查看：[cv_project](./cv_project/) ）
+
+#### Week11运行方式
+
+```python
+conda activate d2l #激活环境
+cd cv-dl-llm-summer-study\cv_project #进入文件目录
+python experiments.py
+```
+
+### Week12总结
+
+#### Week12核心目标
+
+- [ ] **目标一**：完成12周学习总结
+- [ ] **目标二**：完成项目报告ppt
+
+#### Week12阶段成果
+
+- **一**：完成12周学习总结（详细笔记请查看：[week12.md](notes/week12.md) ）
+- **二**：完成代码实践week06_transfer_learning.py,实现LeNet 分类。（详细代码请查看：[week06_transfer_learning.py](./deep_learning/week06_transfer_learning.py) ）
+
+注：由于AlexNet、VGG、GoogLeNet训练时间较长，相关训练图像放置在week06.md中。
+
 ## 项目结构
 
 ```项目结构

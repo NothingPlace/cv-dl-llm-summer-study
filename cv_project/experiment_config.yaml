@@ -1,0 +1,119 @@
+# ============================================================
+# experiment_config.yaml — 实验总配置（第一步：只定义计划，不涉及训练）
+# ============================================================
+#
+# 设计思想：
+#   1. base_config 指向 config.yaml，作为「基线配置」（完整训练配置）
+#   2. 每个实验组(group)只写「相对基线要覆盖的参数」(overrides)
+#      - key 用点分路径定位基线中的字段，如 train.lr / model.params.pretrained
+#      - 不写 overrides 的字段全部继承基线，保证各组只有一个变量在变
+#   3. 本文件只描述「跑什么」；experiments.py 负责执行，plot_experiments.py 负责读图
+#
+# 本实验对比 5 个变量（其余超参与基线完全一致）：
+#   ① 学习率 train.lr           0.01 / 0.001 / 0.0001
+#   ② 有无预训练 model.params.pretrained   true / false
+#   ③ 数据增强 data.augmentation           none / light / standard
+#   ④ 网络架构 model.name      resnet18(残差) / alexnet(纯串行 CNN)
+#      架构组两个 run 均从头训练(pretrained=false)，保证单一变量是网络结构；
+#      其中 resnet18 从头与②的 pretrained_false 配置完全相同，会自动复用结果
+#   ⑤ 迁移学习微调模式 model.finetune_mode
+#      feature_extract(仅特征提取) / full(全量微调)
+#      两者都用预训练 ResNet18，唯一变量是可训练参数范围；
+#      full 与基线配置完全相同，会自动复用结果
+#
+# 目录约定（experiments.py 自动创建，唯一定位每次运行）：
+#   results_root/<group>/<tag>/
+#       config_used.yaml        本组实际使用的完整配置（复现用）
+#       epochs.csv              每个 epoch 的指标
+#       summary.json            本组最终汇总指标
+#       predictions.csv         评估集逐样本预测结果
+#       per_class_metrics.csv   类别级统计
+#       checkpoints/best_model.pth
+#   results_root/<global_summary>   跨组全局总表（每完成一组追加一行）
+# ============================================================
+
+experiment:
+  name: flowers102_resnet18_ablation
+  base_config: config.yaml            # 基线配置（完整训练配置的来源）
+  results_root: ./experiments/results
+  global_summary: summary.csv         # 全局总表文件名（位于 results_root 下）
+
+  # ----------------------------------------------------------
+  # 实验组列表：顺序即执行顺序
+  # 每个 run: tag=运行唯一名(会成为目录名)，overrides=相对基线的点分覆盖
+  # ----------------------------------------------------------
+  groups:
+
+    # ===== 基线（与 config.yaml 完全一致，不覆盖任何参数）=====
+    - group: baseline
+      description: "基线：ResNet18 + ImageNet 预训练 + lr=0.001 + SGD + 无增强"
+      runs:
+        - tag: baseline
+          overrides: {}
+
+    # ===== 变量①：学习率 =====
+    - group: lr
+      description: "学习率扫描，其余同基线（0.001 与基线等效，作为组内参照）"
+      runs:
+        - tag: lr_0.01
+          overrides:
+            "train.lr": 0.01
+        - tag: lr_0.001
+          overrides:
+            "train.lr": 0.001
+        - tag: lr_0.0001
+          overrides:
+            "train.lr": 0.0001
+
+    # ===== 变量②：有无预训练 =====
+    - group: pretrained
+      description: "是否加载 ImageNet 预训练权重"
+      runs:
+        - tag: pretrained_true
+          overrides:
+            "model.params.pretrained": true
+        - tag: pretrained_false
+          overrides:
+            "model.params.pretrained": false
+
+    # ===== 变量③：数据增强策略（仅训练集；评估集始终确定性变换）=====
+    - group: augmentation
+      description: "none=不增强；light=随机裁剪(0.8~1.0)+水平翻转；standard=裁剪(0.6~1.0)+翻转+颜色抖动+旋转15°"
+      runs:
+        - tag: aug_none
+          overrides:
+            "data.augmentation": none
+        - tag: aug_light
+          overrides:
+            "data.augmentation": light
+        - tag: aug_standard
+          overrides:
+            "data.augmentation": standard
+
+    # ===== 变量④：网络架构（残差 CNN vs 纯串行 CNN）=====
+    # 公平对比：两个 run 都不用预训练，唯一变量是 model.name（网络结构）
+    - group: architecture
+      description: "ResNet18(残差连接+BN) vs AlexNet(纯串行卷积)；均从头训练，单一变量=网络结构"
+      runs:
+        - tag: arch_resnet18_scratch
+          overrides:
+            "model.name": resnet18
+            "model.params.pretrained": false   # 与 pretrained 组的 pretrained_false 同指纹 → 自动复用
+        - tag: arch_alexnet
+          overrides:
+            "model.name": alexnet
+            "model.params.pretrained": null    # AlexNet 无此形参，null 取消该参数（build_model 自动过滤）
+            
+    # ===== 变量⑤：迁移学习微调模式（可训练参数范围）=====
+    # 公平对比：两者都用预训练 ResNet18 + 相同 lr/优化器，唯一变量 = finetune_mode
+    # feature_extract: 只训练分类头 fc（~5.2 万参数，0.5%）
+    # full:            全部参数参与训练（~1123 万参数，100%）= 基线 → 自动复用
+    - group: finetune
+      description: "仅特征提取 vs 全量微调；均为预训练 ResNet18，唯一变量=可训练参数范围"
+      runs:
+        - tag: ft_feature_extract
+          overrides:
+            "model.finetune_mode": feature_extract
+        - tag: ft_full
+          overrides:
+            "model.finetune_mode": full        # 与基线同指纹 → 自动复用

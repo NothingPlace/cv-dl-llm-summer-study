@@ -1,0 +1,62 @@
+seed: 42
+deterministic: true
+benchmark: false
+data:
+  name: flowers102
+  root: ./data
+  resize:
+  - 224
+  - 224
+  rgb_expand: false
+  mean:
+  - 0.485
+  - 0.456
+  - 0.406
+  std:
+  - 0.229
+  - 0.224
+  - 0.225
+  num_workers: 2
+  pin_memory: true
+  batch_size: 8
+  download: true
+model:
+  name: resnet18
+  params:
+    num_classes: 102
+    pretrained: true
+  finetune_mode: full
+  pretrained_path: null
+train:
+  max_epoch: 50
+  lr: 0.0001
+  device: cuda
+  optimizer: sgd
+  momentum: 0.9
+  weight_decay: 0.0001
+  early_stopping:
+    enabled: true
+    patience: 5
+    metric: test_loss
+    mode: min
+output:
+  root: experiments\results\lr\lr_0.0001
+  checkpoint_dir: checkpoints
+  log_dir: logs
+  chart_dir: charts
+  best_model_name: best_model.pth
+  save_best_by: test_loss
+logging:
+  csv_log: false
+  run_meta: false
+  verbose: true
+  plot_curves: false
+test:
+  load_ckpt: best_model.pth
+  plot_confusion_matrix: true
+  per_class_csv: true
+  per_class_chart: true
+  plot_error_samples: true
+  error_samples_num: 16
+  plot_prediction_samples: true
+  prediction_samples_num: 16

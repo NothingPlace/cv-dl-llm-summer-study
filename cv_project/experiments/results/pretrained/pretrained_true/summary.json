@@ -1,0 +1,8 @@
+{
+  "group": "pretrained",
+  "tag": "pretrained_true",
+  "status": "reused",
+  "reuse_from": "baseline/baseline",
+  "fingerprint": "68700940827bd5c1",
+  "finished_at": "2026-09-14 21:26:40"
+}

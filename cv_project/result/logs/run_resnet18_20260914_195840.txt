@@ -1,0 +1,15 @@
+Model: resnet18
+Dataset: flowers102
+Device: cuda
+max_epoch: 50 (actually trained 30)
+batch_size: 8
+lr: 0.001
+optimizer: SGD
+weight_decay: 0.0001
+seed: 42
+deterministic: True
+torch_version: 2.13.0+cu130
+python_version: 3.11.15
+best_epoch: 25
+best_test_loss: 0.5997
+total_time: 914.2s
